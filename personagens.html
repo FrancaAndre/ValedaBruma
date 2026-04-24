@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salão dos Heróis - Vale da Bruma</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .heroes-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        .heroes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .hero-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+        .hero-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            border-color: var(--accent-blue);
+        }
+        .hero-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: #fbbf24;
+            margin-bottom: 0.5rem;
+        }
+        .hero-info {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+        .empty-state {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1.2rem;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <main class="heroes-container">
+        <header style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:1rem;">
+            <h1 style="font-family:'Cinzel', serif; font-size:2.5rem; color:#fff;">Salão dos Heróis</h1>
+            <a href="index.html" style="color:#94a3b8; text-decoration:none; font-weight:600;">⬅ Voltar à Página Inicial</a>
+        </header>
+
+        <div id="heroes-grid" class="heroes-grid">
+            <!-- Cards gerados via JS -->
+        </div>
+        
+        <div id="empty-state" class="empty-state hidden">
+            Nenhum herói registrado ainda. <br><br>
+            <a href="ficha.html" class="btn-action">Criar Novo Herói</a>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+    <script src="personagens.js"></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Personagem - OSE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ficha.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <main class="ficha-container">
+        <header class="ficha-header">
+            <h1>Ficha de Aventureiro</h1>
+            <a href="index.html" class="btn-back">⬅ Voltar</a>
+        </header>
+
+        <!-- Formulário OSE -->
+        <form id="ose-form" class="ose-form">
+            <div class="form-section">
+                <h2>Identificação</h2>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="charName">Nome do Personagem (PJ)</label>
+                        <input type="text" id="charName" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="charClass">Classe</label>
+                        <input type="text" id="charClass" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="charTitle">Título</label>
+                        <input type="text" id="charTitle">
+                    </div>
+                    <div class="input-group">
+                        <label for="charAlign">Alinhamento</label>
+                        <select id="charAlign">
+                            <option value="Ordeiro">Ordeiro</option>
+                            <option value="Neutro">Neutro</option>
+                            <option value="Caótico">Caótico</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="charLevel">Nível</label>
+                        <input type="number" id="charLevel" min="1" max="36" value="1" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Atributos Básicos</h2>
+                <div class="form-grid-attrs">
+                    <div class="input-group attr-group">
+                        <label for="attrFOR">FOR <small>(Força)</small></label>
+                        <input type="number" id="attrFOR" min="3" max="18" required>
+                    </div>
+                    <div class="input-group attr-group">
+                        <label for="attrINT">INT <small>(Inteligência)</small></label>
+                        <input type="number" id="attrINT" min="3" max="18" required>
+                    </div>
+                    <div class="input-group attr-group">
+                        <label for="attrSAB">SAB <small>(Sabedoria)</small></label>
+                        <input type="number" id="attrSAB" min="3" max="18" required>
+                    </div>
+                    <div class="input-group attr-group">
+                        <label for="attrDES">DES <small>(Destreza)</small></label>
+                        <input type="number" id="attrDES" min="3" max="18" required>
+                    </div>
+                    <div class="input-group attr-group">
+                        <label for="attrCON">CON <small>(Constituição)</small></label>
+                        <input type="number" id="attrCON" min="3" max="18" required>
+                    </div>
+                    <div class="input-group attr-group">
+                        <label for="attrCAR">CAR <small>(Carisma)</small></label>
+                        <input type="number" id="attrCAR" min="3" max="18" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Combate</h2>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="charHP">Pontos de Vida (PV Máx)</label>
+                        <input type="number" id="charHP" min="1" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="charAC">Classe de Armadura (CA)</label>
+                        <input type="number" id="charAC" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" id="btn-concluir" class="btn-sword">
+                    <span class="btn-text">Concluir Ficha</span>
+                    <div class="sword-container">
+                        <div class="sword"></div>
+                    </div>
+                </button>
+            </div>
+        </form>
+
+        <!-- Visão da Ficha Concluída (escondida por padrão) -->
+        <div id="ficha-view" class="ficha-view hidden">
+            <div id="pdf-content" class="pdf-container">
+                <div class="sheet-header">
+                    <h1 id="viewName">Nome</h1>
+                    <div class="sheet-sub">
+                        <span id="viewClass">Classe</span> - Nível <span id="viewLevel">1</span>
+                    </div>
+                    <div class="sheet-align" id="viewAlign">Ordeiro</div>
+                </div>
+
+                <div class="sheet-body">
+                    <div class="attrs-panel">
+                        <h2>Atributos</h2>
+                        <div class="attr-buttons">
+                            <button class="attr-btn"><span>FOR</span><strong id="viewFOR">10</strong></button>
+                            <button class="attr-btn"><span>INT</span><strong id="viewINT">10</strong></button>
+                            <button class="attr-btn"><span>SAB</span><strong id="viewSAB">10</strong></button>
+                            <button class="attr-btn"><span>DES</span><strong id="viewDES">10</strong></button>
+                            <button class="attr-btn"><span>CON</span><strong id="viewCON">10</strong></button>
+                            <button class="attr-btn"><span>CAR</span><strong id="viewCAR">10</strong></button>
+                        </div>
+                    </div>
+                    
+                    <div class="combat-panel">
+                        <h2>Combate</h2>
+                        <div class="combat-stats">
+                            <div class="stat-box">
+                                <span class="stat-label">PV</span>
+                                <span class="stat-value" id="viewHP">10</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">CA</span>
+                                <span class="stat-value" id="viewAC">9</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="view-actions">
+                <button id="btn-download" class="btn-action">📄 Baixar PDF</button>
+                <a href="personagens.html" class="btn-action">🛡️ Ir para Salão dos Heróis</a>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- Use the same particle config or minimal one -->
+    <script src="script.js"></script>
+    <script src="ficha.js"></script>
+</body>
+</html>

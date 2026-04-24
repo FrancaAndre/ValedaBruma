@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Eldoria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mapa.css">
+</head>
+<body>
+    <header class="map-header">
+        <h1>O Mundo Conhecido</h1>
+        <a href="index.html" class="btn-scroll">⬅ Voltar</a>
+    </header>
+
+    <div class="map-wrapper" id="map-wrapper">
+        <div class="map-container" id="map-container">
+            <img src="Eldoria.jpg" alt="Mapa de Eldoria" id="map-image" draggable="false">
+            <div id="pins-container">
+                <!-- Pins serão inseridos aqui via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Informação -->
+    <div id="info-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h2 id="modal-title">Nome do Local</h2>
+            <div id="modal-desc" class="modal-body">Descrição...</div>
+        </div>
+    </div>
+
+    <script src="mapa.js"></script>
+</body>
+</html>
